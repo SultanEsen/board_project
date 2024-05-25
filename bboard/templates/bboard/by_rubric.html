@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ current_rubric.name }} :: Bulletin Board</title>
-    </head>
-    <body>
-        <h1>Announcements</h1>
-        <h2>Rubric: {{ current_rubric.name }}</h2>
-        <div>
-            <a href="/bboard/">Main</a>
-            {% for rubric in rubrics %}
-            <a href="/bboard/{{ rubric.pk }}/">{{ rubric.name }}</a>
-            {% endfor %}
-            <a href="{% url 'add' %}">Add new announcement</a>
-        </div>
-        {% for bb in bbs %}
-        <div>
-            <h2>{{ bb.title }}</h2>
-            <p>{{ bb.content }}</p>
-            <p>Published: {{ bb.published|date:"d.m.Y H:i:s" }}</p>
-        </div>
-        {% endfor %}
-    </body>
-</html>
+{% extends "layout/basic.html" %}
+
+{% block title %}{{ current_rubric.name }}{% endblock %}
+
+{% block content %}
+<h2>Rubric: {{ current_rubric.name }}</h2>
+{% for bb in bbs %}
+<div>
+    <h2>{{ bb.title }}</h2>
+    <p>{{ bb.content }}</p>
+    <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+</div>
+{% endfor %}
+{% endblock %}
