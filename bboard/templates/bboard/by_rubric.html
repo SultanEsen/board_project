@@ -12,6 +12,7 @@
             {% for rubric in rubrics %}
             <a href="/bboard/{{ rubric.pk }}/">{{ rubric.name }}</a>
             {% endfor %}
+            <a href="{% url 'add' %}">Add new announcement</a>
         </div>
         {% for bb in bbs %}
         <div>
