@@ -15,8 +15,8 @@
         </header>
         <nav>
             <a href="{% url 'index' %}">Main</a>
-            <a href="{% url 'add' %}">Add new</a>
-<!--            <h5>Categories: </h5>-->
+            <a href="{% url 'add' %}">Add new announcement</a>
+            <h5>Categories:</h5>
             {% for rubric in rubrics %}
             <a href="{% url 'by_rubric' rubric.pk %}">
             {{ rubric.name }}</a>
