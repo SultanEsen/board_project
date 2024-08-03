@@ -6,7 +6,9 @@ class Bb(models.Model):
     content = models.TextField(null=True, blank=True, verbose_name='Description')
     price = models.FloatField(null=True, blank=True, verbose_name='Price')
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='When published')
-    rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Rubric')
+    rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Rubric',
+                               # limit_choices_to={'name': 'Transport'}
+                               )
 
     class Meta:
         verbose_name_plural = 'Announcements'
@@ -15,6 +17,15 @@ class Bb(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Kinds(models.IntegerChoices):
+        BUY = 1, 'Buy',
+        SELL = 2, 'Sell',
+        EXCHANGE = 3, 'Exchange',
+        RENT = 4
+
+    kind = models.SmallIntegerField(choices=Kinds.choices, default=Kinds.SELL)
+
 
 
 class Rubric(models.Model):
