@@ -4,11 +4,14 @@
 {% for bb in bbs %}
 <div>
     <h2><a href="{}">{{ bb.title }}</a></h2>
-    <p>{{bb.kind }}</p>
-    <p>{{bb.content }}</p>
+<!--    <p>{{ bb.title_and_price }}</p>-->
+    <p>{{ bb.get_kind_display }}</p>
+    <p>{{ bb.content }}</p>
+    <p>{{ bb.email }}</p>
     <p><a href="{% url 'by_rubric' bb.rubric.pk %}">
     {{ bb.rubric.name }}</a></p>
     <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+
 <!--    <a href="{{ rubric.get_absolute_url }}">{{ rubric.name }}</a>-->
 </div>
 {% endfor %}

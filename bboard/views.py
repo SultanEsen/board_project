@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
@@ -15,9 +15,11 @@ def index(request):
 
 
 def by_rubric(request, rubric_id):
-    bbs = Bb.objects.filter(rubric=rubric_id)
+
+    # current_rubric = get_object_or_404(Rubric, pk=rubric_id)
     rubrics = Rubric.objects.all()
     current_rubric = Rubric.objects.get(pk=rubric_id)
+    bbs = Bb.objects.filter(rubric=rubric_id)
     context = {'bbs': bbs, 'rubrics': rubrics, 'current_rubric': current_rubric}
     return render(request, 'bboard/by_rubric.html', context)
 
