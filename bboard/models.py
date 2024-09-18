@@ -79,15 +79,15 @@ class Rubric(models.Model):
     #     return 'bboard/%s' % self.pk
 
 
-class AdvUser(models.Model):
-    is_activated = models.BooleanField(default=True)
-    users = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
-class Spare(models.Model):
-    name = models.CharField(max_length=50)
-
-
-class Machine(models.Model):
-    name = models.CharField(max_length=30)
-    spares = models.ManyToManyField(Spare)
+# class AdvUser(models.Model):
+#     is_activated = models.BooleanField(default=True)
+#     users = models.OneToOneField(User, on_delete=models.CASCADE)
+#
+#
+# class Spare(models.Model):
+#     name = models.CharField(max_length=50)
+#
+#
+# class Machine(models.Model):
+#     name = models.CharField(max_length=30)
+#     spares = models.ManyToManyField(Spare)
