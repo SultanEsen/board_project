@@ -24,9 +24,9 @@ class Bb(models.Model):
         verbose_name_plural = 'Announcements'
         verbose_name = 'Announcement'
         ordering = ['-published']
-        unique_together = (
-            'title', 'price'
-        )
+        # unique_together = (
+        #     'title', 'price'
+        # )
         # constraints = (
         #     models.CheckConstraint(check=models.Q(price_gte=0) & \
         #         models.Q(price_lte=1000000),
@@ -72,11 +72,11 @@ class Rubric(models.Model):
         ordering = ['name']
         unique_together = ['name']
 
-    def __str__(self):
-        return self.name
-
     # def get_absolute_url(self):
     #     return 'bboard/%s' % self.pk
+
+    def __str__(self):
+        return self.name
 
 
 class AdvUser(models.Model):
@@ -86,6 +86,9 @@ class AdvUser(models.Model):
 
 class Spare(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 
 class Machine(models.Model):
