@@ -1,7 +1,9 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy, reverse
+from django.template.loader import get_template, render_to_string
+from django.template.response import TemplateResponse
 
 from .models import Bb, Rubric
 from .forms import BbForm
@@ -9,11 +11,26 @@ from .forms import BbForm
 
 def index(request):
     # template = loader.get_template('bboard/index.html')
+    # bbs = Bb.objects.all()
+    # rubrics = Rubric.objects.all()
+    # context = {'bbs': bbs, 'rubrics': rubrics}
+    # return render(request, 'bboard/index.html', context)
+
+    # resp = HttpResponse('Here will be announcements',
+    #                     content_type='text/plain; charset=utf-8')
+    # resp.write(' about')
+    # resp.writelines((' all', ' things'))
+    # resp['keywords'] = 'Python, Django'
+    # return resp
     bbs = Bb.objects.all()
     rubrics = Rubric.objects.all()
     context = {'bbs': bbs, 'rubrics': rubrics}
-    return render(request, 'bboard/index.html', context)
-
+    # template = get_template('bboard/index.html')
+    # return HttpResponse(
+    #     template.render(context=context, request=request)
+        # render_to_string('bboard/index.html', context=context, request=request)
+    # )
+    return TemplateResponse(request, 'bboard/index.html', context=context)
 
 def by_rubric(request, rubric_id):
 
