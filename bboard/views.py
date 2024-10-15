@@ -1,4 +1,5 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import (
+    HttpResponseRedirect, HttpResponse, HttpResponseNotFound, Http404, StreamingHttpResponse, FileResponse)
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy, reverse
@@ -22,15 +23,20 @@ def index(request):
     # resp.writelines((' all', ' things'))
     # resp['keywords'] = 'Python, Django'
     # return resp
-    bbs = Bb.objects.all()
-    rubrics = Rubric.objects.all()
-    context = {'bbs': bbs, 'rubrics': rubrics}
+    # bbs = Bb.objects.all()
+    # rubrics = Rubric.objects.all()
+    # context = {'bbs': bbs, 'rubrics': rubrics}
     # template = get_template('bboard/index.html')
     # return HttpResponse(
     #     template.render(context=context, request=request)
         # render_to_string('bboard/index.html', context=context, request=request)
     # )
-    return TemplateResponse(request, 'bboard/index.html', context=context)
+    # return TemplateResponse(request, 'bboard/index.html', context=context)
+    # resp_content = ('Here', ' will', ' be', ' main',' page')
+    # resp = StreamingHttpResponse(resp_content, content_type='text/plain; charset=utf-8')
+    # return resp
+    filename = r'/Users/beksultanesenkulov/Documents/IT/image.png'
+    return FileResponse(open(filename, 'rb'), as_attachment=True)
 
 def by_rubric(request, rubric_id):
 
@@ -83,3 +89,12 @@ def add_and_save(request):
         bbf = BbForm
         context = {'form': bbf}
         return render(request, 'bboard/create.html', context)
+
+
+def detail(request, bb_id):
+    try:
+        bb = Bb.objects.get(pk=bb_id)
+    except Bb.DoesNotExist:
+        # return HttpResponseNotFound('This announcement does not exist')
+        raise Http404('This announcement does not exist')
+    return HttpResponse()
