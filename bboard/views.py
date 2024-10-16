@@ -1,5 +1,6 @@
 from django.http import (
-    HttpResponseRedirect, HttpResponse, HttpResponseNotFound, Http404, StreamingHttpResponse, FileResponse)
+    HttpResponseRedirect, HttpResponse, HttpResponseNotFound, Http404, StreamingHttpResponse, FileResponse,
+    JsonResponse)
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy, reverse
@@ -35,8 +36,10 @@ def index(request):
     # resp_content = ('Here', ' will', ' be', ' main',' page')
     # resp = StreamingHttpResponse(resp_content, content_type='text/plain; charset=utf-8')
     # return resp
-    filename = r'/Users/beksultanesenkulov/Documents/IT/image.png'
-    return FileResponse(open(filename, 'rb'), as_attachment=True)
+    data = {'title': 'Bycylce', 'content': 'used', 'price': 10000.0, }
+    return JsonResponse(data)
+    # filename = r'/Users/beksultanesenkulov/Documents/IT/image.png'
+    # return FileResponse(open(filename, 'rb'), as_attachment=True)
 
 def by_rubric(request, rubric_id):
 
